@@ -1,0 +1,44 @@
+{% extends "layout.njk" %}
+
+
+{% block content %}
+    <div class="card table-container">
+        <table width="100%">
+            <thead>
+            
+                <tr>
+                    <th>Member</th>
+                    <th>Ocupation</th>
+                    <th>height</th>
+                    <th>weight</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for member in members %}
+                <tr>
+                    <td>
+                        <span style="background-image: url({{member.avatar_url}})"></span>
+                    {{member.name}}</td>
+                    <td>{{member.ocupation}}</td>
+                    <td>{{member.height}}cm</td>
+                    <td>{{member.weight}}Kg</td>
+
+                    
+                    <td><a 
+                        href="/members/{{member.id}}">   {# settingsButton #}
+                            <span 
+                            class="material-icons"
+                            cursor="pointer"
+                                >settings_applications</span>
+                        </a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="/members/create"><span
+                    class="material-icons">add
+                                    </span></a>
+    </div>
+{% endblock %}

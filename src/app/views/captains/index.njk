@@ -1,0 +1,40 @@
+{% extends "layout.njk" %}
+
+
+{% block content %}
+    <div class="card table-container">
+
+            <table width="100%">
+                <thead>
+                
+                    <tr>
+                        <th>Captain</th>
+                        <th>Ocupation</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for captain in captains %}
+                    <tr>
+                        <td>
+                            <span style="background-image: url({{captain.avatar_url}})"></span>
+                        {{captain.name}}</td>
+                        <td>{{captain.ocupation}}</td>
+                        <td><a 
+                            href="/captains/{{captain.id}}">
+                                <span 
+                                class="material-icons"
+                                cursor="pointer"
+                                    >settings_applications</span>
+                            </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="/captains/create"><span 
+                    class="material-icons">add
+                                    </span></a>
+
+    </div>
+{% endblock %}

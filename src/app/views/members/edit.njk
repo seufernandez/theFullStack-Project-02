@@ -1,0 +1,65 @@
+{% extends "layout.njk" %}
+
+
+{% block content %}
+
+    <div class="card">
+
+        <section 
+            class="avatar"
+            style="background: url({{member.avatar_url}}) no-repeat center center / cover;">
+        </section>
+    
+    <section class="details">
+
+            <form 
+                method="POST"
+                action="/members?_method=PUT"> {#vai enviar os dados para a pasta instructors #}
+                
+                    <h3>Edit Member</h3>
+
+
+                        {% include 'members/fields.njk' %}
+
+                            {# deu erro porque o fields nao envia o id, então temos que de alguma forma trazer o id para chegarmos à pag desejada #}
+                        <input type="hidden" 
+                        name="id" 
+                        value="{{member.id}}">
+            </form>
+
+        <form id="form-delete" action="/members?_method=DELETE" method="post">
+            <input type="hidden" 
+                    name="id" 
+                    value="{{member.id}}">
+                    <button type="submit">Delete</button>
+        </form>
+
+
+    </section>
+
+
+
+    </div>
+
+        {# js de dentro do html somente de forma experimental #}
+        <script>
+
+            const formDelete = document.querySelector('#form-delete')
+
+            {# ounvindo o evento "submit" #}
+            formDelete.addEventListener('submit', function(event) {
+                //trazendo a caixa de confirm, que retorna t ou f
+                const confirmation = confirm("You really want to delete this Member?")
+
+                //Se não houver confirmação, confirmação = Não:
+                if (!confirmation) {
+                    //cancelando o evento padrão
+                    event.preventDefault()
+                }
+            })
+        </script>
+   
+
+
+
+{% endblock %}

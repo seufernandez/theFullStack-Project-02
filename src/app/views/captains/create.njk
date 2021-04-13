@@ -1,0 +1,20 @@
+{% extends "layout.njk" %}
+
+
+{% block content %}
+    <form 
+    class="card"
+    method="POST"
+     action="/captains"> {#vai enviar os dados para a pasta instructors #}
+        <section 
+            class="avatar"
+            style="background: url(https://assets.bigcartel.com/product_images/222985918/Dolphin+-+WM.jpg?auto=format&fit=max&w=1000) no-repeat center center / cover;"></section>
+        
+        <section class="details">
+            <h3>New Captain</h3>
+
+                {% include "captains/fields.njk" %}
+
+        </section>
+    </form>
+{% endblock %}

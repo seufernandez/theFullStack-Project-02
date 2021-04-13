@@ -1,0 +1,45 @@
+{% extends "layout.njk" %}
+
+
+{% block content %}
+    <div class="card">
+        <section 
+            class="avatar"
+            style="background: url({{captain.avatar_url}}) no-repeat center center / cover;"></section>
+        
+        <section class="details">
+            <h3>Details</h3>
+
+                <div class="item">
+                    <div>Captain</div>
+                    <div>{{captain.name}}</div>
+                </div>
+        
+                <div class="item">
+                    <div>Ocupation</div>
+                    <div>{{captain.ocupation}}</div>
+                </div>
+
+                <div class="item">
+                    <div>Origin</div>
+                    <div>{{captain.origin}}</div>
+                </div>
+
+                <div class="item">
+                    <div>Personal Features</div>
+                    <div>
+                    {% for service in captain.services %}
+                        <span>{{service}}</span>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Joined in</div>
+                    <div>{{captain.created_at}}</div>
+                </div>
+
+                <a href="/captains/{{captain.id}}/edit" class="button">Edit</a>
+        </section>
+    </div>
+{% endblock %}
