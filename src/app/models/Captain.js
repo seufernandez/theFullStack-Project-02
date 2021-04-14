@@ -7,8 +7,12 @@ const db = require("../../config/db")
 module.exports = {
     //seleciona todos os instrutores
     all(callback) {
-
-        db.query(`SELECT * FROM captains`, function (err,results) {//`SELECT * FROM captains`, pegando todos os campos daquela tabela no banco de dados
+        //Colocando todos os instrutores, junto com o numero de convidados que tem os mesmos
+        db.query(`SELECT captains.*, count(members) AS total_guests
+        FROM captains 
+        LEFT JOIN members ON (members.captain_id = captains.id)
+        GROUP BY captains.id
+        ORDER BY total_guests DESC`, function (err,results) {//`SELECT * FROM captains`, pegando todos os campos daquela tabela no banco de dados
             if (err) throw "Database Error"
             
             callback(results.rows)// enviando os dados como parametro
@@ -59,6 +63,20 @@ module.exports = {
 
                     //pegando somente o primeiro registro
                     callback(results.rows[0])
+        })
+    },
+    findBy(filter, callback) {
+        //Colocando todos os instrutores requisitados pelo filter, usando o nome ou a ocupação
+        db.query(`SELECT captains.*, count(members) AS total_guests
+                FROM captains 
+                LEFT JOIN members ON (members.captain_id = captains.id)
+                WHERE captains.name ILIKE '%${filter}%'
+                OR captains.ocupation ILIKE '%${filter}%'
+                GROUP BY captains.id
+                ORDER BY total_guests DESC`, function (err,results) {//`SELECT * FROM captains`, pegando todos os campos daquela tabela no banco de dados
+            if (err) throw `Database Error ${err}`
+            
+            callback(results.rows)// enviando os dados como parametro
         })
     },
     update(data,callback){

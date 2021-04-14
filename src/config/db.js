@@ -6,5 +6,7 @@ module.exports = new Pool({
     password: '',
     host:'localhost',
     port: '5432',
-    database:'spaceship'
+    database:'spaceship',
+
+
 })// assim o node e o pool vai saber certinho que eu tenho as credênciais para entrar nesse banco de dados e rodar as querys

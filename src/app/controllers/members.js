@@ -15,7 +15,11 @@ module.exports = {
 
 
   create(req, res) {
-    return res.render("members/create");
+                                  //function que iŕa receber o parametro que estamos trazendo do Member.js que são os nomes dos capitães 
+    Member.captainsSelectOptions(function(options){
+      return res.render('members/create', {captainOptions: options})
+      
+    })
   },
 
 
@@ -72,7 +76,10 @@ module.exports = {
       
       if (!member) return res.send("Member not found :/ 404");
 
-      return res.render('members/edit', {member})
+      Member.captainsSelectOptions(function(options){
+        return res.render('members/edit', {member ,captainOptions: options})
+        
+      })
     })
 
     return

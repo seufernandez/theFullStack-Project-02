@@ -245,6 +245,7 @@ a.button {
 
     padding: 40px;
     box-sizing: border-box;
+    
 
 
 
@@ -253,6 +254,7 @@ a.button {
 
 .table-container table{
     border-spacing:0;
+    
 }
 
 .table-container thead tr th,
@@ -279,12 +281,22 @@ thead {
     
     text-transform: uppercase;
     background-color: var(--color-purple);
-    color: var(--color-text);
+    color: var(--color-text-ligth);
     font-weight: bold;
     vertical-align: middle;
     font-size: 14px;
 
+    
+
 }
+thead tr th:first-child{
+    border-radius: 8px 0 0 0;
+}
+
+thead tr th:last-child{
+    border-radius: 0 8px 0 0;
+}
+
 
 /* tirando a borda da ultima célula do tbody tr */
 tbody tr:last-child td{
@@ -362,6 +374,59 @@ tbody tr td:nth-child(2){
  .table-container > a span{
      padding: 2px;
  }
+ 
+ 
+ 
+ .table-container > a:hover{
+    background-color: #301b3ff8;
+    color: var(--color-text-ligth);
+    transition: 500ms;
+ }
+
+/*===============filter============*/
+.header{
+    display: flex;
+    justify-content: flex-end;
+
+}
+.header form{
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    margin-bottom: 12px;    
+}
+
+.header form button{
+    display: inline-block;
+    align-items: right;
+    margin:0px;
+    height: 40px;
+    width: 120px;
+
+    color: var(--color-text-ligth);
+   
+}
+
+.header form button:hover{
+   opacity: 0.9;
+   transition: 200ms;
+    cursor: pointer;
+}
+
+.header input{
+    width: 240px;
+    height: 28px;
+    padding: 6px 12px;
+    margin-right: 12px;
+
+    
+    border: 0 ;
+    
+}
+
+
+
+
+
 
 
 /*============INFOMESSAGE==========*/

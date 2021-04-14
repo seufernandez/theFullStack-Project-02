@@ -3,13 +3,29 @@
 
 {% block content %}
     <div class="card table-container">
+            
+            
+            <div class="header">
+                <form action="/captains" method="GET">
+                
+                    <input 
+                        type="text"
+                        name="filter"
+                        placeholder="Name or Captain's Role"
 
+                        >
+                        <button type="submit">Filter</button>
+                </form>
+            </div>
+            
+            
             <table width="100%">
                 <thead>
                 
                     <tr>
                         <th>Captain</th>
                         <th>Ocupation</th>
+                        <th>Guests</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -21,6 +37,7 @@
                             <span style="background-image: url({{captain.avatar_url}})"></span>
                         {{captain.name}}</td>
                         <td>{{captain.ocupation}}</td>
+                        <td>{{captain.total_guests}}</td>
                         <td><a 
                             href="/captains/{{captain.id}}">
                                 <span 
