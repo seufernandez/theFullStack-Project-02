@@ -5,22 +5,40 @@ const { age, date } = require("../../lib/utilities");
 module.exports = {
     
   index(req, res) {
-    //desestruturando o filter do req.query, que é a barra de pesquisa 
-    const {filter} = req.query 
+    
+    let {filter, page, limit } = req.query 
 
-    //Então quando tiver filter
-    if ( filter ){
-      Captain.findBy(filter, function(captains){
-        return res.render("captains/index", { captains });
+    //se não tiver page, quando não for enviado no req, page será igual a 1
+    page = page || 1
+    limit= limit || 2
+    let offset = limit * (page - 1)
 
-      })
+    const params = {
+      filter,
+      page,
+      limit,
+      offset,
+      callback(captains){
+        return res.render("captains/index", { captains, filter })
+      }
 
-    }else{   //se não houver o filter, enviar normalmente
-      
-      Captain.all(function (captains) {
-      return res.render("captains/index", { captains });
-      })
     }
+                      //a função callback está disponivel dentro do params
+    Captain.paginate(params)
+
+    // //Então quando tiver filter
+    // if ( filter ){
+    //   Captain.findBy(filter, function(captains){
+    //     return res.render("captains/index", { captains });
+
+    //   })
+
+    // }else{   //se não houver o filter, enviar normalmente
+      
+    //   Captain.all(function (captains) {
+    //   return res.render("captains/index", { captains });
+    //   })
+    // }
 
 
   },      

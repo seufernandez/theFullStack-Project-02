@@ -114,5 +114,32 @@ module.exports = {
             //se tudo deu certo...
             return callback()
         })
+    },
+    paginate(params){
+        //tirando as variaveis colocadas no params no  controller captains.js
+      const  { filter, limit, offset, callback } = params
+
+      let query = 
+      `SELECT captains.*, count (members) AS total_guests
+      FROM captains
+      LEFT JOIN members ON (captains.id = members.captain_id)
+      `
+
+      if (filter) {
+          query = `${query}
+          WHERE  captains.name ILIKE '%${filter}%'
+          OR  captains.ocupation ILIKE '%${filter}%'
+          `
+      }
+      // Paginação
+      query = `${query}
+      GROUP BY captains.id LIMIT $1 OFFSET $2
+      `
+                        //mandando as variáveis do params para os $1, $2
+      db.query(query, [ limit, offset ], function(err, results){
+          if(err) throw "Database error"
+
+          callback(results.rows)
+      })
     }
 }

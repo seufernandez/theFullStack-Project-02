@@ -14,6 +14,26 @@ for (item of menuItems){
 }
 
 
+// ======= PAGINAÇÃO ===============//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //=================Learning Includes Function==========================
 
